@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Pogoda - Zadanie 1</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; background: #f4f4f9; }
+        .container { background: white; padding: 20px; display: inline-block; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        select, button { padding: 10px; margin: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        .result { margin-top: 20px; padding: 15px; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sprawdź pogodę</h1>
+        <form method="POST">
+            <select name="city">
+                {% for city in cities %}
+                    <option value="{{ city.code }}">{{ city.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Pobierz dane</button>
+        </form>
+
+        {% if weather %}
+            <div class="result">
+                <h2>Pogoda dla {{ weather.name }}</h2>
+                <p>Temperatura: <strong>{{ weather.main.temp }}°C</strong></p>
+                <p>Wilgotność: {{ weather.main.humidity }}%</p>
+                <p>Opis: {{ weather.weather[0].description }}</p>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
