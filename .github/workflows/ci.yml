@@ -9,9 +9,7 @@ on:
 env:
   REGISTRY_GHCR: ghcr.io
   REGISTRY_DOCKERHUB: docker.io
-  # Nazwa obrazu na GHCR (GitHub Container Registry wymaga małych liter)
   IMAGE_NAME_GHCR: ${{ github.repository_owner }}/aplikacja-pogodowa
-  # Nazwa repozytorium cache na DockerHub
   CACHE_IMAGE_DOCKERHUB: ${{ secrets.DOCKERHUB_USERNAME }}/aplikacja-pogodowa-cache
 
 jobs:
@@ -77,7 +75,7 @@ jobs:
         with:
           image-ref: 'lokalny-obraz:test'
           format: 'table'
-          exit-code: '1' # Kod błędu '1' natychmiast zatrzymuje pipeline (Fail)
+          exit-code: '1'
           ignore-unfixed: true
           severity: 'HIGH,CRITICAL'
 
